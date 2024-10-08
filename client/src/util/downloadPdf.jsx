@@ -11,7 +11,6 @@ function DownloadPdf() {
   const { search } = useLocation();
   const examID = search.split("=")[2];
   const nameUrl = search.split("=")[1];
-  const [exameName,setExamName] = useState('')
   const [questions, setQuestions] = useState([]);
   const [isLoading,setLoading] = useState(false)
   useEffect(() => {
@@ -19,7 +18,7 @@ function DownloadPdf() {
     fetch(`/api/${nameUrl}/examDownload/${examID}`)
       .then((res) => res.json())
       .then( async (data) => {
-        setExamName(data.name)
+        
         const imageUrlToBase64 = async (url) => {
             const data = await fetch(url);
             const blob = await data.blob();
@@ -55,7 +54,7 @@ function DownloadPdf() {
       if (element) {
         const options = {
           margin: 10,
-          filename: `${exameName}.pdf`,
+          filename: 'output.pdf',
           image: { type: 'jpeg', quality: 1 },
            //html2canvas: { scale: 2 },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },

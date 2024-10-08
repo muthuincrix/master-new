@@ -8,7 +8,7 @@ import Radio from "@mui/material/Radio";
 import Image from "../../../util/Avater";
 import useWindowDimensions from '../../../util/useWindowDimensions';
 export default function CreatePage({ controlNotification }) {
- 
+  console.log(Image.MaleAvatar1);
   const navigator = useNavigate();
   const { width } = useWindowDimensions();
   const [gender, setGender] = useState([
@@ -68,7 +68,7 @@ export default function CreatePage({ controlNotification }) {
      { url: Image.FemaleAvatar4, name: "FeMale4" },]
 
      setImageName = [...setImageName.filter(task => task.url == getDetails[0].url)]
-     
+     console.log(setImageName);
       fetch('/api/user/createDetails',{
         method:"POST",
         headers:{
@@ -286,7 +286,7 @@ const ChooseGender = ({ task, index, setGender }) => {
 
 const ChooseAvatar = ({ task, index, setAvatar,width }) => {
   const change = () => {
-  
+    console.log(task);
     setAvatar((preValue) => {
       const getValue = [...preValue];
       getValue[index].isSelect = true;

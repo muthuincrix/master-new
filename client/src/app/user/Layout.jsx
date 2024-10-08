@@ -511,11 +511,11 @@ function MoView({
         />
       </CustomTabPanel>
 
-      {selectGoal.plan == "free" ? (
+      {/* {selectGoal.plan == "free" ? (
         <CustomTabPanel value={value} index={4}>
           <Payment Payment={selectGoal.Payment} Notificate={Notificate} />
         </CustomTabPanel>
-      ) : null}
+      ) : null} */}
       <div style={{ marginTop: "auto" }}>
         <Footer />
       </div>

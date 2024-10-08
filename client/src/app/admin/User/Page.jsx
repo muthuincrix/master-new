@@ -37,7 +37,7 @@ export default function InstitutePage({ ControlNotification }) {
       .then((res) => res.json())
       .then( async(data) => {
         if (data.status == "success") {
-      
+          console.log(data);
            if(data.message.teacherList.length > 0) 
            {
             for(let i=0;i<data.message.teacherList.length;i++) {
@@ -137,7 +137,7 @@ if(status == 'success' ) {
   return (
     isPageLoading ? <Loader /> :
     <div>
-{/* <SearchBar /> */}
+      <SearchBar />
       <Stack sx={{ marginTop: "20px" }}>
         {institute.length > 0 ? (
           ""
@@ -320,11 +320,11 @@ const ActiveBatch = ({ institute }) => {
           <div
             className="scrollHide"
             style={{
-              padding: "10px",
+              padding: "20px",
               display: "flex",
               gap: "20px",
-             // height: "55vh",
-            flexWrap:'wrap',
+              height: "55vh",
+         
               width: "100%",
               overflowY: "scroll",
             }}
@@ -368,7 +368,7 @@ const Batch = ({ task }) => {
         height: "110px",
         borderRadius: "5px",
         background: "#FFF",
-        boxShadow: " 0px 5px 5px 2px rgba(0, 0, 0, 0.10)",
+        boxShadow: " 0px 15px 62px 0px rgba(0, 0, 0, 0.10)",
         cursor: "pointer",
         padding: "10px",
         display:'flex',

@@ -1,6 +1,3 @@
-Object.keys(require.cache).forEach(function(key) {
-    delete require.cache[key];
-});
 //Imports
 const express = require("express");
 const route = require("./router/route.js");
@@ -35,7 +32,6 @@ app.disable("x-powered-by");
 
 app.use(express.json());
 app.use(express.text());
-
 //MongoBD Connection
 connectDB();
 //Auth Session Management
@@ -132,6 +128,7 @@ app.get("/payMent",userVerify,(req,res)=>{
    } catch (error) {
      throw error
    }
+   
 })
 
 
@@ -140,47 +137,6 @@ app.get("/",examInfo,userVerify, (req, res) => {
 });
 
 /// user route
-
-
-const Institute = require('./models/institution.js')
-const Batches = require('./models/batch.js')
-
-app.get('/callPrint',async(req,res)=>{
-  
-  res.json(await clearDublicated())
-})
-async function clearDublicated ()  {
-  const institute = await Institute.findOne({_id:"657f1b8733381806c2098e4b"})
-
-  let getBatchList = []
-  if(institute.batch.length > 0) {
-    for(let i=0 ; i<institute.batch.length; i++) {
-      const getbatch = await Batches.findOne({_id:institute.batch[i].batchID})
-      if(getbatch.studentList.length !== 0) {
-        getBatchList.push(getbatch)
-      }
-//   new Promise((resolve,reject) =>{
- 
-//     (async() =>{
-      
-// const getbatch = await Batches.findOne({_id:institute.batch[i].batchID})
-// if(!getbatch) return reject()
-  
-//   if(getbatch.studentList.length !== 0) {
-  
-//   // console.log( await check_duplicate_in_array(getbatch.studentList))
-//   getBatchList.push(getbatch)
-  
-//   }
-
-//     })()
-//   })
-    }
-    return getBatchList
-  }
-
-
-}
 
 
 
@@ -325,17 +281,6 @@ app.get('/policy',(req,res) => {
 app.use("/", express.static(path.join(__dirname, "../client/build")));
 app.use("/", express.static(path.join(__dirname, "../invoice")));
 
-app.get('/checkDate',(req,res) => {
-  var date = new Date("11/21/1987 16:00:00");
-     var date2 = new Date("11/21/2025 16:00:00");
-  res.send(eval(date) < eval(date2))
-})
-app.get('/checkDate2',(req,res) => {
-  var date = new Date("11/21/1987 16:00:00");
-     var date2 = new Date("11/21/2025 16:00:00");
-  res.send(eval(date) > eval(date2))
-})
-
 app.use((err, req, res, next) => {
 
   const status = err.status || 500;
@@ -435,65 +380,8 @@ app.use((req, res, next) => {
   res.redirect('/error')
 })
 
-
-
 //Server
 app.listen(1338, () => {
   console.log(`Server start at port : ${process.env.PORT}`);
 });
-
-
-// const Institute = require('./models/institution.js')
-// const Batches = require('./models/batch.js')
-// async function clearDublicated ()  {
-//   const institute = await Institute.findOne({_id:"657f1b8733381806c2098e4b"})
-//   // console.log(institute.batch);
-//   if(institute.batch.length > 0) {
-//     for(let i=0 ; i<institute.batch.length; i++) {
-//   new Promise((resolve,reject) =>{
- 
-//     (async() =>{
-      
-// const getbatch = await Batches.findOne({_id:institute.batch[i].batchID})
-// if(!getbatch) return reject()
-  
-//   if(getbatch.studentList.length !== 0) {
-  
-//   console.log( await check_duplicate_in_array(getbatch.studentList))
-   
-//   }
-//     })()
-//   })
-//     }
-//   }
-// }
-
-
-
-
-
-let check_duplicate_in_array = async (input_array) => {
-
-  let duplicate_elements = []
-  for (num in input_array) {
-    
-      for (num2 in input_array) {
-          if (num === num2) {
-              continue;
-          }
-          else {
-        
-              if (input_array[num].email == input_array[num2].email) {
-                 
-                  duplicate_elements.push(input_array[num]);
-              }
-          }
-      }
-  }
-  return [...new Set(duplicate_elements)];
-}
-
-
-
-  // clearDublicated()
 

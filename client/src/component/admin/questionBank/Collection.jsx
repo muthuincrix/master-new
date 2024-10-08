@@ -86,7 +86,7 @@ function Collection() {
       })
         .then((res) => res.json())
         .then((data) => {
-         
+          console.log(data);
           if(data.status == 'info') return controlNotification(data.status,data.message)
           setPrint(data);
         

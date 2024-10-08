@@ -15,7 +15,6 @@ import { useNavigate } from "react-router-dom";
 import  '../../App.css'
 import InstitutePage from "../../component/admin/institution/components/institutePage";
 import Loader from '../../util/Loader'
-
 function Dashboard({menu,isCall,handleDrawerClose}) {
   const navigator = useNavigate();
   const pathName = window.location.pathname;
@@ -54,7 +53,6 @@ const [isloading,setLoading] = useState(false)
     
   }, []);
 
-  
   const getBank = () => {
    
     fetch("/api/admin/getBank")
@@ -106,7 +104,7 @@ const [isloading,setLoading] = useState(false)
         // display: "flex",
         marginTop:'30px',
         position: "fixed",
-        width: menu == false ? `${width -80}px` : `${width - 260}px`,
+        width: menu == false ? "95%" : "85%",
         height: "90vh",
         overflow: "hidden",
     //    padding:'20px'
@@ -122,14 +120,15 @@ const [isloading,setLoading] = useState(false)
       <div
         style={{
           // width: "calc(100% - 280px)",
-          width: "100%",
+          width: "calc(100%)",
           height: "calc(100vh - 70px)",
           // padding: "0 30px",
   
         }}
         onMouseLeave={handleDrawerClose}
       >
-          <div style={{ width: "calc(100%-104px)", padding:"20px" }} onMouseLeave={handleDrawerClose}>
+        <div style={{ display: "flex", justifyContent: "center" }}  >
+          <div style={{ width: "100%" }} onMouseLeave={handleDrawerClose}>
             {pathName === "/admin/dashboard" ? (
               isloading ? <Loader /> :
               <Courses
@@ -139,15 +138,12 @@ const [isloading,setLoading] = useState(false)
               />
             ) : null}
             {pathName === "/admin/bank" ? <QuestionBank bank={bank} /> : null}
-            {pathName === "/admin/analytics" ?  width > 700 ?  <Analytics /> : <Display /> : null}
+            {pathName === "/admin/analytics" ? <Analytics /> : null}
             {
             pathName === "/admin/institution" ? (
-              
-              <Institution ControlNotification={ControlNotification} />
-          
-               ) : null 
+              <Institution ControlNotification={ControlNotification} /> ) : null 
             }
-            {pathName === "/admin/manage" ?  width > 700 ?  <Manage /> : <Display /> : null}
+            {pathName === "/admin/manage" ? <Manage /> : null}
             {pathName === "/admin/dashboard/course" ? (
               <Course
                 ControlNotification={ControlNotification}
@@ -172,6 +168,7 @@ const [isloading,setLoading] = useState(false)
             ) : null}
           </div>
         </div>
+      </div>
     </div>
   );
 }

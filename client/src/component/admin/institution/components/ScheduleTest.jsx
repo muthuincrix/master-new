@@ -230,7 +230,7 @@ const SetDetailsExam = ({ setDetails, details }) => {
   const date = new Date();
 
   const handleChange = (e) => {
-  
+    console.log(e.$d);
     setDetails((preValue) => {
       const getValue = { ...preValue };
       getValue.setDate = e.$d;

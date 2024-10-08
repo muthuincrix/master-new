@@ -6,7 +6,6 @@ import useWindowDimensions from "../../../util/useWindowDimensions";
 import { useNavigate } from "react-router-dom";
 import Address from '../../../util/Address'
 import { callProfileUrl } from "../../../util/callImageUrl";
-import {domainName} from '../../../util/paymentServerName'
 export default function CheckOut() {
   const { width } = useWindowDimensions();
   const navigator = useNavigate();
@@ -45,7 +44,6 @@ export default function CheckOut() {
           planMonth: data.planMonth,
           courseName: data.courseName,
           discount: data.discount,
-          discountAmount : data.discountAmount
         });
       });
     fetch("/api/user/getUserAddress")
@@ -151,10 +149,10 @@ function DTCheckOut({ user, details, width, address ,isChange,setChange }) {
                 {details.discount > 0 ? (
                   <Stack direction="row" justifyContent="space-between">
                     <p style={{ color: "#FEA800", fontSize: "18px" }}>
-                      Discount {' '} ({details.discount}%)
+                      Discount
                     </p>
                     <p style={{ fontSize: "16px", color: "#FEA800" }}>
-                      -{' '}₹{details.discountAmount}
+                      {details.discount}%
                     </p>
                   </Stack>
                 ) : null}
@@ -192,7 +190,7 @@ function DTCheckOut({ user, details, width, address ,isChange,setChange }) {
                 <form
                   method="POST"
                   name="customerData"
-                  action={domainName}
+                  action="http://localhost:1338/payment/ccavRequestHandler"
                 >
                   <button
                     style={{
@@ -289,11 +287,9 @@ function MDCheckOut({ user, details,address ,isChange,setChange}) {
           </Stack>
           {details.discount > 0 ? (
             <Stack direction="row" justifyContent="space-between">
-              <p style={{ color: "#FEA800", fontSize: "18px" }}>
-                Discount {' '} ({details.discount}%)
-                </p>
+              <p style={{ color: "#FEA800", fontSize: "18px" }}>Discount</p>
               <p style={{ fontSize: "16px", color: "#FEA800" }}>
-              -{' '}₹{details.discountAmount}
+                {details.discount}%
               </p>
             </Stack>
           ) : null}
@@ -358,7 +354,7 @@ function MDCheckOut({ user, details,address ,isChange,setChange}) {
                 method="POST"
                 style={{ width: "100%", marginTop: "auto" }}
                 name="customerData"
-                action={domainName}
+                action="https://themastersacademy.in/payment/ccavRequestHandler"
               >
                 <button
                   style={{

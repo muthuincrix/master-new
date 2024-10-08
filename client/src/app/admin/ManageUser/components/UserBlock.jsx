@@ -61,7 +61,7 @@ else setError('Please Enter Valid User Email Name')
    
       <Switch {...label} 
 checked={action}
-      
+      onChange={(e)=> console.log(e.target.value)}
                  sx={{
                     '& .MuiSwitch-switchBase.Mui-checked': {
                         color: '#187163'

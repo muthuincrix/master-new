@@ -26,25 +26,20 @@ exports.getPlan = async(req,res) =>{
          
             if(get.length > 0) {
                const payment = get[0]
-
-               // create GST
                 let GST = (payment.amount/100)*18
                let discount = (payment.amount/100)*payment.discount
               GST = Math.round(GST)  
-             
-              const total = (payment.amount - discount) // add without GST
+              const total = (payment.amount - discount) + GST 
               const date = new Date()
               date.setMonth(date.getMonth()+payment.month)
               let indianTime = date.toLocaleString("en-US", {
                 timeZone: "Asia/Kolkata",
                 hour12: false,
               });
-            
              const getDay = indianTime.split(',')[0].split('/')
              req.session.courseName = course.title
              req.session.planMonth = payment.month
              req.session.amount = payment.amount
-             req.session.discountAmount = discount
              req.session.discount = payment.discount
              req.session.totalAmount = total
             req.session.validDay = getDay[1]
@@ -83,8 +78,7 @@ exports.getPlan = async(req,res) =>{
                 year:req.session.validYear,
                 planMonth : req.session.planMonth,
                 courseName:req.session.courseName,
-                discount:req.session.discount,
-                discountAmount : req.session.discountAmount 
+                discount:req.session.discount
             })
           }
           else return res.json({status:'error',message:'somthing wrong'})

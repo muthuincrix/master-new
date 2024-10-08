@@ -57,20 +57,17 @@ exports.TotalPaymentAndExam =async (currentYear, month) => {
     try {
         const countYear = await getYears(currentYear);
         let option = [];
- 
         const getMonthAndYear = [];
         for (let i = 0; i < countYear.length; i++) {
           option.push({ year: countYear[i], totalExam: '' ,totalPayment:''});
           let count = countYear[i] == currentYear ? eval(month) + 1 : 12;
-         
           for (let j = 0; j < count; j++) {
             const getDate = await analiysticsTime(countYear[i], j + 1, "02");
             getMonthAndYear.push(getDate);
           }
         }
-  
         option = await getPaymentAnalysisTotal(getMonthAndYear,countYear,option);
-       // option = await getExamAnalysisTotal(getMonthAndYear,countYear,option)
+        option = await getExamAnalysisTotal(getMonthAndYear,countYear,option)
      return option
     } catch (error) {
         throw error
@@ -93,44 +90,70 @@ function getYears(currentYear) {
 
 async function getPaymentAnalysisTotal(getMonthAndYear, countYear,option) {
   try {
-    const getDate = []  
-for(let i = 0 ;i<option.length +1; i++) {
-  if( option.length == i){
+    let payCount = 0;
 
-     const get = await analiysticsTime(option[option.length -1].year+1,1,2)
-     getDate.push(get)
-  }
-  else
-{  const get = await analiysticsTime(option[i].year,1,2)
-  getDate.push(get)}
-}
-
-let amount = 0
-for(let i = 0; i < option.length; i++){
-  await payment
- .find({
-      createdAt:{
-        $gte: getDate[i],
-        $lt: getDate[i + 1],
-      },
-    })
- .then((result) => {
-      console.log(result);
-      for(let p=0;p<result.length;p++){
-        if(result[p].status =='success')
-        { 
-          amount = amount + result[p].totalAmount
+    if (getMonthAndYear.length > 12) {
+      for (let i = 0, j = 0; i < getMonthAndYear.length; i = 12 + i, j++) {
+        if (getMonthAndYear[i + 12] !== undefined) {
+          await payment
+            .find({
+              createdAt: {
+                $gte: getMonthAndYear[i],
+                $lt: getMonthAndYear[i + 12],
+              },
+            })
+            .then((result) => {
+                let amount = 0
+                for(let p=0;p<result.length;p++){
+                    amount = amount + result[p].totalAmount
+                }
+                option[j].totalPayment = amount
+          
+             
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        } else {
+         
+          if (getMonthAndYear.length % 12 > 1) {
+            for (
+              let index = 1, minIndex = 2;
+              index < getMonthAndYear.length % 12;
+              index++, minIndex--
+            ) {
+              if (
+                getMonthAndYear[getMonthAndYear.length - minIndex + 1] !==
+                undefined
+              ) {
+                await payment
+                  .find({
+                    createdAt: {
+                      $gte: getMonthAndYear[getMonthAndYear.length - minIndex],
+                      $lt: getMonthAndYear[
+                        getMonthAndYear.length - minIndex + 1
+                      ],
+                    },
+                  })
+                  .then((result) => {
+                    let amount = 0
+                    for(let p=0;p<result.length;p++){
+                        amount = amount + result[p].totalAmount
+                    }
+                    option[option.length -1].totalPayment = amount
+                    // option[option.length -1].totalPayment = result.length
+               
+                  })
+                  .catch((error) => {
+                    console.error("Error:", error);
+                  });
+              }
+            }
+          }
         }
       }
-    
-      option[i].totalPayment = amount
-    })
- .catch((error) => {
-      console.error("Error:", error);
-    })
- 
-}
-return option
+      return option
+    }
   } catch (error) {
     throw error;
   }
@@ -143,7 +166,6 @@ async function getExamAnalysisTotal(getMonthAndYear, countYear,option) {
       if (getMonthAndYear.length > 12) {
         for (let i = 0, j = 0; i < getMonthAndYear.length; i = 12 + i, j++) {
           if (getMonthAndYear[i + 12] !== undefined) {
-            
             await exam
               .find({
                 createdAt: {
@@ -166,7 +188,6 @@ async function getExamAnalysisTotal(getMonthAndYear, countYear,option) {
                 index < getMonthAndYear.length % 12;
                 index++, minIndex--
               ) {
-             
                 if (
                   getMonthAndYear[getMonthAndYear.length - minIndex + 1] !==
                   undefined
@@ -188,8 +209,6 @@ async function getExamAnalysisTotal(getMonthAndYear, countYear,option) {
                       console.error("Error:", error);
                     });
                 }
-              
-
               }
             }
           }

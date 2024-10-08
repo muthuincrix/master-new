@@ -44,10 +44,11 @@ const {
   createScheduleExam,
 } = require("../../controller/admin/exam/createExam.js");
 
-const {downloadList,examDownload,getDownloadList,saveToBatch} = require("../../controller/admin/institute/downloadList.js")
+const {downloadList,examDownload} = require("../../controller/admin/institute/downloadList.js")
 //GET
 
-//download PDF
+//downloadList 
+router.get('/download',downloadList)
 router.get('/examDownload/*',examDownload)
 
 router.get("/getBank", getBank);
@@ -67,9 +68,6 @@ router.post("/getCourseDetails", getCourseDetails);
 router.post("/getCourseAvalible", getCourseAvalible);
 
 
-//Download Excel
-router.post('/getDownloadList',getDownloadList)
-router.post('/saveToBatch',saveToBatch)
 
 
 // Institute

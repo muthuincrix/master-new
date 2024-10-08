@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Stack, SvgIcon, Button } from "@mui/material";
 import image from "../../../util/Avater";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CancelIcon from '@mui/icons-material/Cancel';
 import Header from "../../exam/pages/components/ExamHeader";
 import Notification from "../../../util/Alert";
 import { useNavigate } from "react-router-dom";
@@ -131,6 +130,7 @@ export default function DTPayment() {
                   style={{
                     width: width > 1000 ?  "40%" : "60%",
                     padding:'20px',
+                  
                     marginBottom:'10px',
                     borderRadius: "11px",
                     backgroundColor:
@@ -291,15 +291,15 @@ function Free() {
             sx={{ color: "#02C94F", width: "20px", height: "20px" }}
             component={CheckCircleIcon}
           />
-          <p>2 Practice tests</p>
+          <p>Daily 5 Practice tests</p>
         </Stack>
-        
+
         <Stack direction={"row"} gap={"10px"}>
           <SvgIcon
             sx={{ color: "#02C94F", width: "20px", height: "20px" }}
             component={CheckCircleIcon}
           />
-          <p>1 Mock Test </p>
+          <p>Mock Test weekly once</p>
         </Stack>
         <Stack direction={"row"} gap={"10px"}>
           <div
@@ -310,11 +310,11 @@ function Free() {
               width: "20px",
             }}
           >
-              <SvgIcon
-            sx={{ color: "red", width: "20px", height: "20px" }}
-            component={CancelIcon}
-          />
-        
+            <img
+              style={{ width: "8px", height: "3px" }}
+              src={image.Dash}
+              alt=""
+            />
           </div>
           <p>1-1 Mentorship</p>
         </Stack>
@@ -327,10 +327,11 @@ function Free() {
               width: "20px",
             }}
           >
-              <SvgIcon
-            sx={{ color: "red", width: "20px", height: "20px" }}
-            component={CancelIcon}
-          />
+            <img
+              style={{ width: "8px", height: "3px" }}
+              src={image.Dash}
+              alt=""
+            />
           </div>
           <p>Course materials in PDF</p>
         </Stack>
@@ -343,10 +344,11 @@ function Free() {
               width: "20px",
             }}
           >
-               <SvgIcon
-            sx={{ color: "red", width: "20px", height: "20px" }}
-            component={CancelIcon}
-          />
+            <img
+              style={{ width: "8px", height: "3px" }}
+              src={image.Dash}
+              alt=""
+            />
           </div>
           <p> Self Assesment</p>
         </Stack>
@@ -359,10 +361,11 @@ function Free() {
               width: "20px",
             }}
           >
-              <SvgIcon
-            sx={{ color: "red", width: "20px", height: "20px" }}
-            component={CancelIcon}
-          />
+            <img
+              style={{ width: "8px", height: "3px" }}
+              src={image.Dash}
+              alt=""
+            />
           </div>
           <p> Report and marksheets</p>
         </Stack>

@@ -27,7 +27,7 @@ function Manage() {
     if (userList.length > 0) {
       if (filter !== "") {
         setSearchEmail("");
-      
+        console.log('filter');
         fetch("/api/admin/pageManageUserFilter",{
           method: "POST",
           headers: {
@@ -49,7 +49,7 @@ function Manage() {
     if (userList.length > 0) {
       if (searchEmail !== "") {
         setFilter("");
-       
+        console.log('email');
         fetch("/api/admin/pageManageUserSeachEmail",{
           method: "POST",
           headers: {

@@ -23,7 +23,7 @@ const ManageUser = ({ isCall,setCall,userList,nextPage,ControlNotification,filte
 
    if(savePageNum < newPage)
     {
-       
+        console.log('calling');
         nextPage(newPage)
         setPageNum(newPage)
     }

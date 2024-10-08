@@ -418,15 +418,15 @@ export default function AsaidMenu() {
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1,marginTop: "30px", p: open == false ? 1 : 2 }}
+        sx={{ flexGrow: 1, marginTop: "30px", p: open == false ? 2 : 2 }}
       >
-      <Typography > 
+        <Typography>
           <Layout
             menu={open}
             isCall={isCall}
             handleDrawerClose={handleDrawerClose}
           />
-    </Typography> 
+        </Typography>
       </Box>
     </Box>
   );

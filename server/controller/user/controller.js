@@ -22,7 +22,7 @@ exports.login = async (req, res, next) => {
   const hash = sha256Hasher.update(password).digest("hex");
   const check = await User.findOne({ email: req.body.email,password: hash });
   if (check) {
- 
+    console.log(check);
     if(check.action == true) {
       return res.json({ status: "error", message: "Your Account Has Been Blocked" });
     }
@@ -41,7 +41,7 @@ exports.login = async (req, res, next) => {
         req.session.examID = State.examID;
        return res.json({ status: "isExam",examID:State.examID });
       } else {
-        if (check.avatar == undefined || check.name == undefined || check.avatar == '' || check.name == '') {
+        if (check.avatar == undefined || check.name == undefined || check.avatar == '') {
           req.session.isCreate = true;
           req.session.checkPage = 'userDetails' 
           return res.json({ status: "userDetails" }) 
@@ -76,7 +76,7 @@ exports.login = async (req, res, next) => {
        return res.json({ status: "isExam" ,examID:State.examID });
       }
 
-      if (check.avatar == undefined || check.name == undefined || check.avatar == '' || check.name == '') {
+      if (check.avatar == undefined || check.name == undefined || check.avatar == '') {
         req.session.isCreate = true;
         req.session.checkPage = 'userDetails' 
         return res.json({ status: "userDetails" });

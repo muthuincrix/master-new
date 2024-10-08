@@ -64,7 +64,7 @@ export default function TopNavBar({user,goal}) {
         </Stack>
         <Stack direction="row" spacing={4} alignItems="center">
 
-          {
+          {/* {
             goal.plan == 'free' ?
           
           <Button
@@ -85,7 +85,7 @@ export default function TopNavBar({user,goal}) {
           :
           null
           
-} 
+} */}
 
           <PlanChip plan={goal.plan == 'free' ? 'Free' : goal.plan == 'pro' ? 'Pro' : goal.plan == 'standard' ? 'Standard' : null } />
           <Button

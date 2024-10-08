@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 export default function SearchBar({filter,setFilter,setSearchEmail}) {
-
+console.log(filter);
   return (
   <Paper sx={{height:'100px',width:'100%',display:'flex',justifyContent:'space-between',alignItems:'center',padding:'20px'}}>
     <Stack sx={{width:'200px'}}>
