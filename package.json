@@ -3,7 +3,6 @@
   "version": "1.0.2",
   "description": "A product from incrix",
   "main": "server/index.js",
-  "homepage": "https://app.themastersacademy.in",
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon server/index.js",
